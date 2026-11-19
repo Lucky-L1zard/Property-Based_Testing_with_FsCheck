@@ -1,4 +1,4 @@
-using FluentAssertions;
+ï»¿using FluentAssertions;
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
@@ -19,7 +19,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             return copy;
         }
 
-        //P1 · Òóäè é íàçàä
+        //P1 Â· Ð¢ÑƒÐ´Ð¸ Ð¹ Ð½Ð°Ð·Ð°Ð´
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public Property Enroll_then_unenroll_restores_initial_state(Course course, Student[] initialStudents, Student target)
         {
@@ -46,7 +46,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             return ok.When(correctForTest);
         }
 
-        //P2 · ²íâàð³àíò
+        //P2 Â· Ð†Ð½Ð²Ð°Ñ€Ñ–Ð°Ð½Ñ‚
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public void Course_enrollment_invariants_hold_for_any_students(Course course, Student[] students)
         {
@@ -62,7 +62,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             }
         }
 
-        //P3 · ²äåìïîòåíòí³ñòü
+        //P3 Â· Ð†Ð´ÐµÐ¼Ð¿Ð¾Ñ‚ÐµÐ½Ñ‚Ð½Ñ–ÑÑ‚ÑŒ
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public Property Enrolling_same_student_twice_is_idempotent(Course course, Student student)
         {
@@ -84,7 +84,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             return ok.When(firstEnrolled);
         }
 
-        //P4 · Ð³çí³ øëÿõè
+        //P4 Â· Ð Ñ–Ð·Ð½Ñ– ÑˆÐ»ÑÑ…Ð¸
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public Property Enrolling_two_students_in_different_order_yields_same_state(Course course, Student s1, Student s2)
         {
@@ -96,11 +96,11 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
                 var courseOrder1 = CloneCourse(course);
                 var courseOrder2 = CloneCourse(course);
 
-                //Øëÿõ 1: ñïî÷àòêó s1, ïîò³ì s2
+                //Ð¨Ð»ÑÑ… 1: ÑÐ¿Ð¾Ñ‡Ð°Ñ‚ÐºÑƒ s1, Ð¿Ð¾Ñ‚Ñ–Ð¼ s2
                 bool r1First = courseOrder1.Enroll(s1);
                 bool r1Second = courseOrder1.Enroll(s2);
 
-                //Øëÿõ 2: ñïî÷àòêó s2, ïîò³ì s1
+                //Ð¨Ð»ÑÑ… 2: ÑÐ¿Ð¾Ñ‡Ð°Ñ‚ÐºÑƒ s2, Ð¿Ð¾Ñ‚Ñ–Ð¼ s1
                 bool r2First = courseOrder2.Enroll(s2);
                 bool r2Second = courseOrder2.Enroll(s1);
 
@@ -114,7 +114,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             return ok.When(correctForTest);
         }
 
-        //P8 · Áåç âèíÿòê³â
+        //P8 Â· Ð‘ÐµÐ· Ð²Ð¸Ð½ÑÑ‚ÐºÑ–Ð²
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public void Enroll_valid_student_never_throws(Course course, Student[] students)
         {
@@ -129,7 +129,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             act.Should().NotThrow();
         }
 
-        //Ïåðåâ³ðêà âèíÿòêó (Course.Unenroll => InvalidOperationException)
+        //ÐŸÐµÑ€ÐµÐ²Ñ–Ñ€ÐºÐ° Ð²Ð¸Ð½ÑÑ‚ÐºÑƒ (Course.Unenroll => InvalidOperationException)
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public Property Unenroll_non_enrolled_student_throws(Course course, Student[] enrolledStudents, Student notEnrolledStudent)
         {

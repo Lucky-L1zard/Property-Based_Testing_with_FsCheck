@@ -1,4 +1,4 @@
-using FluentAssertions;
+ï»¿using FluentAssertions;
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
@@ -19,14 +19,14 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             return copy;
         }
 
-        //P5 · Îðàêóë
+        //P5 Â· ÐžÑ€Ð°ÐºÑƒÐ»
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public void Service_enroll_matches_direct_course_enroll(Course baseCourse, Student[] students)
         {
-            //Ïåðåäáà÷åí³ ïðàâèëüí³ çíà÷åííÿ: ïðÿìèé âèêëèê ìåòîä³â îá'ºêòà Course
+            //ÐŸÐµÑ€ÐµÐ´Ð±Ð°Ñ‡ÐµÐ½Ñ– Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ñ– Ð·Ð½Ð°Ñ‡ÐµÐ½Ð½Ñ: Ð¿Ñ€ÑÐ¼Ð¸Ð¹ Ð²Ð¸ÐºÐ»Ð¸Ðº Ð¼ÐµÑ‚Ð¾Ð´Ñ–Ð² Ð¾Ð±'Ñ”ÐºÑ‚Ð° Course
             var directCourse = CloneCourse(baseCourse);
 
-            //Íà ïåðåâ³ðêó: âèêëèê ÷åðåç EnrollmentService + EnrollmentRepository
+            //ÐÐ° Ð¿ÐµÑ€ÐµÐ²Ñ–Ñ€ÐºÑƒ: Ð²Ð¸ÐºÐ»Ð¸Ðº Ñ‡ÐµÑ€ÐµÐ· EnrollmentService + EnrollmentRepository
             var repo = new EnrollmentRepository();
             repo.Save(CloneCourse(baseCourse));
             var service = new EnrollmentService(repo);
@@ -44,7 +44,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             storedCourse.FreeSeats.Should().Be(directCourse.FreeSeats);
         }
 
-        //P7 · Ëåãêî ïåðåâ³ðèòè
+        //P7 Â· Ð›ÐµÐ³ÐºÐ¾ Ð¿ÐµÑ€ÐµÐ²Ñ–Ñ€Ð¸Ñ‚Ð¸
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public void Total_enrollments_equals_sum_of_student_courses(Course[] courses, Student[] students)
         {
@@ -71,7 +71,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             service.TotalEnrollments().Should().Be(sumByStudents);
         }
 
-        //P3 · ²äåìïîòåíòí³ñòü
+        //P3 Â· Ð†Ð´ÐµÐ¼Ð¿Ð¾Ñ‚ÐµÐ½Ñ‚Ð½Ñ–ÑÑ‚ÑŒ
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public void Repository_save_same_course_id_overwrites_previous(Course initialCourse, Course secondCourse)
         {
@@ -85,7 +85,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             repo.Get(initialCourse.Id).Capacity.Should().Be(secondCourse.Capacity);
         }
 
-        //Ïåðåâ³ðêà âèíÿòêó (EnrollmentService.CreateCourse => InvalidOperationException)
+        //ÐŸÐµÑ€ÐµÐ²Ñ–Ñ€ÐºÐ° Ð²Ð¸Ð½ÑÑ‚ÐºÑƒ (EnrollmentService.CreateCourse => InvalidOperationException)
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public void Create_duplicate_course_throws(Course course, Course otherCourse)
         {
@@ -98,7 +98,7 @@ namespace Online_Course_Enrollment_System_Properties.Tests.Properties
             act.Should().Throw<InvalidOperationException>();
         }
 
-        // Ïåðåâ³ðêà âèíÿòêó (EnrollmentRepository.Get => KeyNotFoundException)
+        // ÐŸÐµÑ€ÐµÐ²Ñ–Ñ€ÐºÐ° Ð²Ð¸Ð½ÑÑ‚ÐºÑƒ (EnrollmentRepository.Get => KeyNotFoundException)
         [Property(Arbitrary = new[] { typeof(CourseArbitraries) })]
         public Property Get_non_existent_course_throws(Course[] existingCourses, Course target)
         {
